@@ -1,14 +1,18 @@
 :root{
-  --bg:#0b0b10;
-  --panel
-    --
---
---
---
---
---
---
+ --bg: #0b0b10;
+    --panel:#11121a;
+    --muted:#a7aab3;
+    --text:#e8e9ee;
+    --accent:#7c5cff;
+    --ring: 0 0 0 .15rem color-mix(in oklab, var(--accent) 60%, white 0%);
+    --radius:18px;
+    --shadow: 0 8px 30px rgba(0,0,0,.35);
+    --grid-min: 14rem;
 }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f7f7fb; --panel:#ffffff; --muted:#6b7280; --text:#0b0b10; --accent:#5b6cff; --shadow:0 6px 24px rgba(0,0,0,.08);}  
+  }
+  
 
 
 
