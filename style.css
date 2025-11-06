@@ -12,7 +12,29 @@
   @media (prefers-color-scheme: light){
     :root{ --bg:#f7f7fb; --panel:#ffffff; --muted:#6b7280; --text:#0b0b10; --accent:#5b6cff; --shadow:0 6px 24px rgba(0,0,0,.08);}  
   }
-  
+  *,*::before,*::after{ box-sizing:border-box }
+  html,body{ height:100% }
+  body{
+    margin:0; font: 16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;
+    color:var(--text); background:radial-gradient(1200px 800px at 80% -10%, color-mix(in oklab, var(--accent) 18%, transparent 82%), transparent 70%), var(--bg);
+  }
+  .container{ 
+    max-width:1200px;
+    margin-inline:auto; 
+    padding:24px 
+}
+  header{
+    position:sticky; top:0; z-index:8; backdrop-filter:saturate(1.3) blur(10px);
+    background:color-mix(in oklab, var(--bg) 86%, transparent 14%);
+    border-bottom:1px solid color-mix(in oklab, var(--text) 8%, transparent);
+  }
+  .hero{ 
+    display:grid;
+ gap:16px;
+      align-items:end;
+       grid-template-columns: 1fr auto;
+     }
+
 
 
 
