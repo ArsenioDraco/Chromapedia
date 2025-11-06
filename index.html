@@ -53,6 +53,24 @@
       </div>
     </div>
   </header>
+<main class="container">
+    <section id="results" class="grid" aria-live="polite"></section>
+    <div id="empty" class="empty" hidden>No colors match your query.</div>
+  </main>
+
+  <div id="drawer" class="drawer hidden" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="overlay" id="overlay" tabindex="-1" aria-label="Close"></div>
+    <aside class="panel" id="panel" tabindex="-1">
+      <header>
+        <h2 id="panelTitle">Color Details</h2>
+        <div>
+          <button class="button" id="copyToken">Copy Token</button>
+          <button class="button" id="closePanel">Close</button>
+        </div>
+      </header>
+      <div class="content" id="panelContent"></div>
+    </aside>
+  </div>
 
 
 
