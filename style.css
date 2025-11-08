@@ -81,6 +81,28 @@ h1{ font-size: clamp(2rem, 4vw + 1rem, 3.4rem); margin:8px 0 4px; letter-spacing
   .pair .sample{ height:80px; display:grid; place-items:center; font-weight:700 }
   .pair .caption{ padding:10px 12px; display:flex; align-items:center; justify-content:space-between }
   .kbd{ font: 600 .9rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; padding:.35rem .5rem; border-radius:6px; border:1px solid color-mix(in oklab, var(--text) 12%, transparent); background:color-mix(in oklab, var(--panel) 75%, transparent) }
+/* Toast for copy feedback */
+  .toast{ position:fixed; right:20px; bottom:24px; background:rgba(0,0,0,.8); color:#fff; padding:10px 14px; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,.4); z-index:9999 }
+
+  footer{ color:var(--muted); text-align:center; padding:40px 20px }
+
+  @media (max-width: 900px){
+    .controls{ 
+        grid-template-columns: 1fr; 
+    }
+    .hero{ 
+        grid-template-columns: 1fr;
+     }
+    .drawer{ 
+        grid-template-columns: 1fr; 
+    }
+    .overlay{ 
+        grid-column: 1 / -1 
+    }
+    .panel{ 
+        grid-column: 1 / -1 
+    }
+  }
 
 
 
