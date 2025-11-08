@@ -65,6 +65,23 @@ h1{ font-size: clamp(2rem, 4vw + 1rem, 3.4rem); margin:8px 0 4px; letter-spacing
   .icon-btn{ border:none; border-radius:10px; background:rgba(0,0,0,.2); color:#fff; padding:8px; cursor:pointer }
   .icon-btn:hover{ transform: translateY(-1px) }
   .empty{ opacity:.7; text-align:center; padding:40px }
+/* Drawer */
+  .drawer{ position:fixed; inset:0; display:grid; grid-template-columns: 1fr min(540px, 100%); }
+  .drawer.hidden{ display:none }
+  /* overlay covers left column only; panel sits in the right column and is fully interactive */
+  .overlay{ grid-column: 1 / 2; width:100%; height:100%; background:rgba(0,0,0,.45); opacity:0; transition:opacity .25s ease; pointer-events:auto; z-index:10 }
+  .panel{ grid-column: 2 / 3; background:var(--panel); border-left:1px solid color-mix(in oklab, var(--text) 10%, transparent); transform: translateX(100%); transition: transform .25s ease; overflow:auto; pointer-events:auto; z-index:20 }
+  .drawer[aria-hidden="false"] .overlay{ opacity:1 }
+  .drawer[aria-hidden="false"] .panel{ transform:none }
+  .panel header{ position:sticky; top:0; background:var(--panel); display:flex; align-items:center; justify-content:space-between; padding:16px; z-index:30 }
+  .panel h2{ font-size:1.6rem; margin:0 }
+  .panel .content{ padding:16px; display:grid; gap:16px }
+  .pair-row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px }
+  .pair{ border-radius:14px; border:1px solid color-mix(in oklab, var(--text) 10%, transparent); overflow:hidden }
+  .pair .sample{ height:80px; display:grid; place-items:center; font-weight:700 }
+  .pair .caption{ padding:10px 12px; display:flex; align-items:center; justify-content:space-between }
+  .kbd{ font: 600 .9rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; padding:.35rem .5rem; border-radius:6px; border:1px solid color-mix(in oklab, var(--text) 12%, transparent); background:color-mix(in oklab, var(--panel) 75%, transparent) }
+
 
 
 
