@@ -23,6 +23,9 @@ const COLOR_DB = [
   { name:"Charcoal", family:"black", hex:"#27272A", tags:["neutral","ui"], popularity:93 },
   { name:"Ivory", family:"white", hex:"#FFFFF0", tags:["neutral","paper"], popularity:82 }
 ];
+/***********************
+ * Utilities
+ ***********************/
 
 
 
