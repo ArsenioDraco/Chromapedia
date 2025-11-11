@@ -29,6 +29,9 @@ const COLOR_DB = [
 const $ = sel => document.querySelector(sel);
 const $$ = sel => Array.from(document.querySelectorAll(sel));
 const clamp = (v,min,max)=> Math.min(max, Math.max(min,v));
+// Normalize hex strings to full 7-character '#RRGGBB' uppercase. Accepts 3- or 6-digit input.
+function normalizeHex(hex){
+  if(!hex || typeof hex !== 'string') return '#000000';
 
 
 
