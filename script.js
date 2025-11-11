@@ -32,7 +32,18 @@ const clamp = (v,min,max)=> Math.min(max, Math.max(min,v));
 // Normalize hex strings to full 7-character '#RRGGBB' uppercase. Accepts 3- or 6-digit input.
 function normalizeHex(hex){
   if(!hex || typeof hex !== 'string') return '#000000';
+ let s = hex.trim().replace(/^#/, '');
+  if(/^[0-9a-fA-F]{3}$/.test(s)) s = s.split('').map(c=>c+c).join('');
+  if(!/^[0-9a-fA-F]{6}$/.test(s)){
+    console.warn('normalizeHex: invalid hex provided', hex);
+    return '#000000';
+  }
+  return '#' + s.toUpperCase();
+}
 
+const hexToRgb = hex => {
+  const n = normalizeHex(hex);
+  const r = parseInt(n.slice(1,3), 16);
 
 
 
