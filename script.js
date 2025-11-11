@@ -64,6 +64,16 @@ function hslToRgb(h,s,l){
   const b = Math.round(hue2rgb(p,q,h-1/3)*255);
   return {r,g,b};
 }
+function contrastRatio(hexA, hexB){
+  const L = hex => {
+    const {r,g,b} = hexToRgb(hex);
+    const sr=[r,g,b].map(v=>{ v/=255; return v<=.03928? v/12.92 : Math.pow((v+.055)/1.055, 2.4); });
+    return .2126*sr[0]+.7152*sr[1]+.0722*sr[2];
+  };
+  const La=L(hexA), Lb=L(hexB);
+  const lighter=Math.max(La,Lb), darker=Math.min(La,Lb);
+  return ((lighter+0.05)/(darker+0.05));
+}
 
 
 
