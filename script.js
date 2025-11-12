@@ -74,6 +74,14 @@ function contrastRatio(hexA, hexB){
   const lighter=Math.max(La,Lb), darker=Math.min(La,Lb);
   return ((lighter+0.05)/(darker+0.05));
 }
+function slugify(name){ return name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+function shade(hex, step){ // step in [-5..5], negative = darker
+  const {r,g,b} = hexToRgb(hex);
+  let {h,s,l} = rgbToHsl(r,g,b);
+  const delta = step*6; // 6% per step
+  l = clamp(l + delta, 0, 100);
+  const rgb = hslToRgb(h,s,l); return rgbToHex(rgb);
+}
 
 
 
