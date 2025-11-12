@@ -82,6 +82,43 @@ function shade(hex, step){ // step in [-5..5], negative = darker
   l = clamp(l + delta, 0, 100);
   const rgb = hslToRgb(h,s,l); return rgbToHex(rgb);
 }
+/***********************
+ * Robust copy with fallback + visual feedback
+ ***********************/
+async function copyTextToClipboard(text){
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      await navigator.clipboard.writeText(text);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.top = '0';
+      ta.style.left = '0';
+      ta.style.width = '1px';
+      ta.style.height = '1px';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      if(!ok) throw new Error('execCommand failed');
+    }
+    showToast('Copied to clipboard');
+    return true;
+  }catch(err){
+    console.warn('copy failed', err);
+    showToast('Could not copy — select and press Ctrl/Cmd+C', true);
+    return false;
+  }
+}
+function showToast(text, isError=false){
+  const t = document.createElement('div'); t.className='toast'; t.textContent = text; if(isError) t.style.background='rgba(120,20,20,.9)';
+  document.body.appendChild(t);
+  setTimeout(()=>{ t.style.transition='opacity .25s'; t.style.opacity='0'; setTimeout(()=> t.remove(),250); }, 1600);
+}
+
 
 
 
