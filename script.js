@@ -118,6 +118,17 @@ function showToast(text, isError=false){
   document.body.appendChild(t);
   setTimeout(()=>{ t.style.transition='opacity .25s'; t.style.opacity='0'; setTimeout(()=> t.remove(),250); }, 1600);
 }
+/***********************
+ * State & Rendering
+ ***********************/
+let state = {
+  query: '',
+  family: '',
+  sort: 'pop',
+  colors: [...COLOR_DB],
+  theme: localStorage.getItem('theme') || 'auto'
+};
+
 
 
 
