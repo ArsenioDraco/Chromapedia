@@ -144,6 +144,13 @@ function renderGrid(){
     list = list.filter(c=> [c.name, c.family, c.hex, ...(c.tags||[])].join(' ').toLowerCase().includes(q) );
   }
 
+  switch(state.sort){
+    case 'name': list.sort((a,b)=> a.name.localeCompare(b.name)); break;
+    case 'hue': list.sort((a,b)=> rgbToHsl(...Object.values(hexToRgb(a.hex))).h - rgbToHsl(...Object.values(hexToRgb(b.hex))).h ); break;
+    case 'light': list.sort((a,b)=> rgbToHsl(...Object.values(hexToRgb(a.hex))).l - rgbToHsl(...Object.values(hexToRgb(b.hex))).l ); break;
+    default: list.sort((a,b)=> (b.popularity||0)-(a.popularity||0));
+  }
+  
 
 
 
