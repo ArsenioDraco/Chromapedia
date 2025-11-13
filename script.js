@@ -150,7 +150,24 @@ function renderGrid(){
     case 'light': list.sort((a,b)=> rgbToHsl(...Object.values(hexToRgb(a.hex))).l - rgbToHsl(...Object.values(hexToRgb(b.hex))).l ); break;
     default: list.sort((a,b)=> (b.popularity||0)-(a.popularity||0));
   }
-  
+  root.innerHTML = '';
+  if(!list.length){ $('#empty').hidden=false; return; } else { $('#empty').hidden=true; }
+  const frag = document.createDocumentFragment();
+  list.forEach(c=> frag.appendChild(cardEl(c)));
+  root.appendChild(frag);
+}
+
+function cardEl(color){
+  const {name, hex, family} = color; const id = slugify(name);
+  const card = document.createElement('article'); card.tabIndex=0; card.className='card'; card.setAttribute('role','article'); card.dataset.slug=id;
+  const normalizedHex = normalizeHex(hex);
+  const sw = document.createElement('div'); sw.className='swatch'; sw.style.background=normalizedHex; sw.style.color = contrastRatio(normalizedHex, '#000')>4.5? '#000' : '#fff'; sw.textContent=name;
+  const actions = document.createElement('div'); actions.className='actions';
+  const copy = iconBtn('Copy HEX', copyIcon(), ()=> copyTextToClipboard(normalizedHex));
+  const open = iconBtn('Open details', openIcon(), ()=> openPanel(color));
+  const link = iconBtn('Deep link', linkIcon(), ()=> { history.pushState({},'',`#color/${id}`); openPanel(color); });
+  actions.append(copy, open, link);
+
 
 
 
