@@ -186,6 +186,15 @@ function openPanel(color){
   const drawer = $('#drawer'); drawer.classList.remove('hidden'); drawer.setAttribute('aria-hidden','false');
   const title = $('#panelTitle'); title.textContent = `${color.name} — ${normalizeHex(color.hex)}`;
   const content = $('#panelContent'); content.innerHTML='';
+// Swatch + Tokens
+  const top = document.createElement('div'); top.style.display='grid'; top.style.gap='12px';
+  const sw = document.createElement('div'); sw.className='pair';
+  const sample = document.createElement('div'); sample.className='sample'; sample.style.background=normalizeHex(color.hex); sample.style.color = contrastRatio(normalizeHex(color.hex),'#000')>4.5?'#000':'#fff'; sample.style.height='120px'; sample.textContent = color.name;
+  const cap = document.createElement('div'); cap.className='caption';
+  const codes = document.createElement('div'); codes.innerHTML = `<strong>Hex</strong> ${normalizeHex(color.hex)} &nbsp; <strong>RGB</strong> ${Object.values(hexToRgb(normalizeHex(color.hex))).join(', ')} &nbsp; <strong>HSL</strong> ${Object.values(rgbToHsl(...Object.values(hexToRgb(normalizeHex(color.hex))))).join(' / ')}`;
+  const copyBtn = miniButton('Copy HEX', ()=> copyTextToClipboard(normalizeHex(color.hex)));
+  cap.append(codes, copyBtn); sw.append(sample, cap);
+  top.append(sw);
 
 
 
