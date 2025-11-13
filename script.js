@@ -195,6 +195,20 @@ function openPanel(color){
   const copyBtn = miniButton('Copy HEX', ()=> copyTextToClipboard(normalizeHex(color.hex)));
   cap.append(codes, copyBtn); sw.append(sample, cap);
   top.append(sw);
+// Shades & Tints
+  const shadesBlock = document.createElement('div');
+  const h3 = document.createElement('h3'); h3.textContent='Shades & Tints'; shadesBlock.appendChild(h3);
+  const shadeRow = document.createElement('div'); shadeRow.className='pair-row';
+  for(let i=-5;i<=5;i++){
+    const c = shade(color.hex, i);
+    const p = document.createElement('div'); p.className='pair';
+    const s = document.createElement('div'); s.className='sample'; s.style.background=c; s.style.color = contrastRatio(c,'#000')>4.5?'#000':'#fff'; s.textContent = i===0? 'Base' : (i<0? `${Math.abs(i)*6}% darker` : `${i*6}% lighter`);
+    const cap2 = document.createElement('div'); cap2.className='caption';
+    cap2.innerHTML = `<span class="codes">${c}</span>`;
+    const b = miniButton('Copy', ()=> copyTextToClipboard(c)); cap2.appendChild(b);
+    p.append(s, cap2); shadeRow.appendChild(p);
+  }
+  shadesBlock.appendChild(shadeRow);
 
 
 
