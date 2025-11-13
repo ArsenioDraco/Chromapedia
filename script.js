@@ -167,6 +167,25 @@ function cardEl(color){
   const open = iconBtn('Open details', openIcon(), ()=> openPanel(color));
   const link = iconBtn('Deep link', linkIcon(), ()=> { history.pushState({},'',`#color/${id}`); openPanel(color); });
   actions.append(copy, open, link);
+const meta = document.createElement('div'); meta.className='meta';
+  const nameEl = document.createElement('div'); nameEl.className='name'; nameEl.textContent = `${name} · ${family}`;
+  const codes = document.createElement('div'); codes.className='codes';
+  const {r,g,b}=hexToRgb(normalizedHex); const hsl=rgbToHsl(r,g,b);
+  codes.textContent = `${normalizedHex}  •  rgb(${r}, ${g}, ${b})  •  hsl(${hsl.h} ${hsl.s}% ${hsl.l}%)`;
+  const tags = document.createElement('div'); tags.className='tags';
+  (color.tags||[]).forEach(t=>{ const chip=document.createElement('span'); chip.className='chip'; chip.textContent=t; tags.appendChild(chip); });
+  meta.append(nameEl, codes, tags);
+
+  card.append(sw, actions, meta);
+  card.addEventListener('click', e=> { if(e.target.closest('.icon-btn')) return; openPanel(color); });
+  card.addEventListener('keydown', e=> { if(e.key==='Enter' || e.key===' ') { e.preventDefault(); openPanel(color); }});
+  return card;
+}
+
+function openPanel(color){
+  const drawer = $('#drawer'); drawer.classList.remove('hidden'); drawer.setAttribute('aria-hidden','false');
+  const title = $('#panelTitle'); title.textContent = `${color.name} — ${normalizeHex(color.hex)}`;
+  const content = $('#panelContent'); content.innerHTML='';
 
 
 
