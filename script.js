@@ -128,6 +128,21 @@ let state = {
   colors: [...COLOR_DB],
   theme: localStorage.getItem('theme') || 'auto'
 };
+function applyTheme(){
+  if(state.theme==='dark') document.documentElement.style.colorScheme='dark';
+  else if(state.theme==='light') document.documentElement.style.colorScheme='light';
+  else document.documentElement.style.colorScheme='normal';
+}
+applyTheme();
+
+function renderGrid(){
+  const root = $('#results');
+  let list = state.colors.slice();
+  const q = state.query.trim().toLowerCase();
+  if(state.family) list = list.filter(c=>c.family===state.family);
+  if(q){
+    list = list.filter(c=> [c.name, c.family, c.hex, ...(c.tags||[])].join(' ').toLowerCase().includes(q) );
+  }
 
 
 
