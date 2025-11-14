@@ -209,6 +209,20 @@ function openPanel(color){
     p.append(s, cap2); shadeRow.appendChild(p);
   }
   shadesBlock.appendChild(shadeRow);
+ // WCAG Pairings
+  const wcag = document.createElement('div');
+  const h4 = document.createElement('h3'); h4.textContent='WCAG Contrast'; wcag.appendChild(h4);
+  const pairs = document.createElement('div'); pairs.className='pair-row';
+  const pairAgainst = ['#000000', '#111827', '#374151', '#9CA3AF', '#FFFFFF'];
+  pairAgainst.forEach(bg=>{
+    const p = document.createElement('div'); p.className='pair';
+    const s = document.createElement('div'); s.className='sample'; s.style.background=bg; s.style.color=normalizeHex(color.hex); s.textContent='Aa';
+    const ratio = contrastRatio(normalizeHex(color.hex), bg);
+    const cap2 = document.createElement('div'); cap2.className='caption';
+    cap2.innerHTML = `<span>${bg}</span><strong>${ratio.toFixed(2)}:1</strong>`;
+    p.append(s, cap2); pairs.appendChild(p);
+  });
+  wcag.appendChild(pairs);
 
 
 
