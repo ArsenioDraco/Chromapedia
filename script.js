@@ -242,6 +242,21 @@ function openPanel(color){
 }
 
 function closePanel(){ const drawer=$('#drawer'); drawer.setAttribute('aria-hidden','true'); drawer.classList.add('hidden'); }
+/***********************
+ * Interactions
+ ***********************/
+$('#q').addEventListener('input', e=> { state.query=e.target.value; renderGrid(); syncHash(); });
+$('#family').addEventListener('change', e=> { state.family=e.target.value; renderGrid(); syncHash(); });
+$('#sort').addEventListener('change', e=> { state.sort=e.target.value; renderGrid(); });
+$('#toggleTheme').addEventListener('click', ()=>{ state.theme = state.theme==='light' ? 'dark' : state.theme==='dark' ? 'auto' : 'light'; localStorage.setItem('theme', state.theme); applyTheme(); alert('Theme: ' + state.theme); });
+$('#exportJSON').addEventListener('click', ()=>{
+  const cards = $$('.card');
+  const data = cards.map(c=>{
+    const slug = c.dataset.slug; const item = state.colors.find(x=>slugify(x.name)===slug); return item;
+  });
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='chromapedia-export.json'; a.click(); URL.revokeObjectURL(url);
+});
 
 
 
