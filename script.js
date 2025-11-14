@@ -257,6 +257,26 @@ $('#exportJSON').addEventListener('click', ()=>{
   const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
   const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='chromapedia-export.json'; a.click(); URL.revokeObjectURL(url);
 });
+$('#addColor').addEventListener('click', ()=>{
+  const name = prompt('Name of color (e.g., Ocean Blue)'); if(!name) return;
+  const hex = prompt('Hex (e.g., #1E90FF or #1E9)'); if(!/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(hex||'')) return alert('Enter a valid 3- or 6‑digit hex like #1E90FF or #1E9');
+  const family = prompt('Family (red, blue, green, etc.)') || 'gray';
+  const tags = (prompt('Tags (comma separated)')||'').split(',').map(t=>t.trim()).filter(Boolean);
+  const normalized = normalizeHex(hex);
+  const entry = { name, hex: normalized, family: family.toLowerCase(), tags, popularity: Math.floor(Math.random()*100) };
+  state.colors.push(entry); renderGrid(); history.pushState({},'',`#color/${slugify(name)}`); openPanel(entry);
+});
+$('#overlay').addEventListener('click', closePanel);
+$('#closePanel').addEventListener('click', closePanel);
+
+// Keyboard shortcuts
+window.addEventListener('keydown', e=>{
+  if(e.key==='/' && document.activeElement!==$('#q')){ e.preventDefault(); $('#q').focus(); }
+  if(e.key==='f'){ $('#family').focus(); }
+  if(e.key==='s'){ $('#sort').focus(); }
+  if(e.key==='Escape'){ closePanel(); }
+  if(e.key==='?'){ alert('Shortcuts:\n/ focus search\nf filter family\ns sort\nEsc close panel'); }
+});
 
 
 
