@@ -223,6 +223,26 @@ function openPanel(color){
     p.append(s, cap2); pairs.appendChild(p);
   });
   wcag.appendChild(pairs);
+// Tokens
+  const tokens = document.createElement('div');
+  const h5 = document.createElement('h3'); h5.textContent='Copy‑Ready Tokens'; tokens.appendChild(h5);
+  const pre = document.createElement('pre'); pre.className='codes';
+  const slug = slugify(color.name);
+  const tokenText = `--color-${slug}: ${normalizeHex(color.hex)};\n.color-${slug}{ color: var(--color-${slug}); }\n.bg-${slug}{ background: var(--color-${slug}); }`;
+  pre.textContent = tokenText; tokens.appendChild(pre);
+
+  // Assemble
+  content.append(top, shadesBlock, wcag, tokens);
+
+  // Copy token button
+  $('#copyToken').onclick = ()=> copyTextToClipboard(tokenText);
+
+  // Ensure the panel is focusable and keyboard scrollable
+  setTimeout(()=>{ $('#panel').focus(); }, 50);
+}
+
+function closePanel(){ const drawer=$('#drawer'); drawer.setAttribute('aria-hidden','true'); drawer.classList.add('hidden'); }
+
 
 
 
