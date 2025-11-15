@@ -73,7 +73,7 @@ h1{ font-size: clamp(2rem, 4vw + 1rem, 3.4rem); margin:8px 0 4px; letter-spacing
   .panel{ grid-column: 2 / 3; background:var(--panel); border-left:1px solid color-mix(in oklab, var(--text) 10%, transparent); transform: translateX(100%); transition: transform .25s ease; overflow:auto; pointer-events:auto; z-index:20 }
   .drawer[aria-hidden="false"] .overlay{ opacity:1 }
   .drawer[aria-hidden="false"] .panel{ transform:none }
-  .panel header{ position:static; top:0; background:var(--panel); display:flex; align-items:center; justify-content:space-between; padding:16px; z-index:30 }
+  .panel header{ position:static; top:auto; background:var(--panel); display:flex; align-items:center; justify-content:space-between; padding:16px; z-index:30 }
   .panel h2{ font-size:1.6rem; margin:0 }
   .panel .content{ padding:16px; display:grid; gap:16px }
   .pair-row{ display:grid; grid-template-columns: 1fr 1fr; gap:12px }
