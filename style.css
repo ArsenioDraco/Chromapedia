@@ -24,7 +24,7 @@
     padding:24px 
 }
   header{
-    position:sticky; top:0; z-index:8; backdrop-filter:saturate(1.3) blur(10px);
+    position:static; top:0; z-index:8; backdrop-filter:saturate(1.3) blur(10px);
     background:color-mix(in oklab, var(--bg) 86%, transparent 14%);
     border-bottom:1px solid color-mix(in oklab, var(--text) 8%, transparent);
   }
