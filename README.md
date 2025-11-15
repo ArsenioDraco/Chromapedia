@@ -42,3 +42,7 @@ Chromapedia is an interactive web application for browsing, exploring, and worki
 ## Personal Note
 
 This is my first serious project involving JavaScript. The idea came from wanting a single place where a large variety of colors and their shades could be explored easily. Searching for individual colors is often tedious, so this project aims to simplify the process by providing everything in one place along with ready-to-use CSS tokens. I plan to continue building more projects and expanding my skills in JavaScript and other languages.
+
+## Github pages link:
+
+https://arseniodraco.github.io/Chromapedia/
