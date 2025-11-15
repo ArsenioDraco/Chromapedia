@@ -277,6 +277,31 @@ window.addEventListener('keydown', e=>{
   if(e.key==='Escape'){ closePanel(); }
   if(e.key==='?'){ alert('Shortcuts:\n/ focus search\nf filter family\ns sort\nEsc close panel'); }
 });
+/***********************
+ * Deep Links & Routing
+ ***********************/
+function syncHash(){
+  const p = new URLSearchParams();
+  if(state.query) p.set('q', state.query);
+  if(state.family) p.set('family', state.family);
+  if(state.sort!=='pop') p.set('sort', state.sort);
+  const qp = p.toString(); const base = location.hash.split('?')[0] || '#';
+  location.hash = base + (qp? ('?'+qp) : '');
+}
+
+function parseHash(){
+  const h = location.hash;
+  if(h.startsWith('#color/')){
+    const slug = h.slice('#color/'.length).split('?')[0];
+    const item = state.colors.find(c=> slugify(c.name)===slug);
+    if(item){ openPanel(item); document.title = `${item.name} — Chromapedia`; }
+  }
+  const qp = h.split('?')[1]; if(!qp) return; const sp = new URLSearchParams(qp);
+  state.query = sp.get('q')||''; state.family = sp.get('family')||''; state.sort = sp.get('sort')||'pop';
+  $('#q').value = state.query; $('#family').value = state.family; $('#sort').value = state.sort;
+}
+window.addEventListener('hashchange', parseHash);
+
 
 
 
