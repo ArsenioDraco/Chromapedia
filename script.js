@@ -301,6 +301,27 @@ function parseHash(){
   $('#q').value = state.query; $('#family').value = state.family; $('#sort').value = state.sort;
 }
 window.addEventListener('hashchange', parseHash);
+/***********************
+ * Icon helpers
+ ***********************/
+function iconBtn(title, svg, onClick){ const b=document.createElement('button'); b.className='icon-btn'; b.type='button'; b.title=title; b.innerHTML=svg; b.onclick=onClick; return b; }
+function miniButton(label, onClick){ const b=document.createElement('button'); b.className='button'; b.type='button'; b.style.padding='8px 10px'; b.textContent=label; b.onclick=onClick; return b; }
+function copyIcon(){ return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="12" height="12" rx="2" stroke="white" stroke-width="1.5"/><rect x="3" y="3" width="12" height="12" rx="2" stroke="white" stroke-width="1.5"/></svg>`; }
+function openIcon(){ return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17 17 7M17 7H9m8 0v8" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>`; }
+function linkIcon(){ return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 14 6 18a4 4 0 1 1-6-6l4-4m6 2 4-4a4 4 0 1 1 6 6l-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>`; }
+
+/***********************
+ * Init
+ ***********************/
+renderGrid();
+parseHash();
+
+// Tiny installable offline cache via a blob Service Worker
+if('serviceWorker' in navigator){
+  const swCode = `self.addEventListener('install', e=>{ e.waitUntil(caches.open('chromapedia-v1').then(c=> c.addAll(['./']))); self.skipWaiting(); });\nself.addEventListener('fetch', e=>{ e.respondWith(caches.match(e.request).then(r=> r || fetch(e.request))); });`;
+  const blob = new Blob([swCode], {type:'text/javascript'}); const url = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(url).catch(()=>{});
+}
 
 
 
