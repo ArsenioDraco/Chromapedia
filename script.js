@@ -248,7 +248,7 @@ function closePanel(){ const drawer=$('#drawer'); drawer.setAttribute('aria-hidd
 $('#q').addEventListener('input', e=> { state.query=e.target.value; renderGrid(); syncHash(); });
 $('#family').addEventListener('change', e=> { state.family=e.target.value; renderGrid(); syncHash(); });
 $('#sort').addEventListener('change', e=> { state.sort=e.target.value; renderGrid(); });
-$('#toggleTheme').addEventListener('click', ()=>{ state.theme = state.theme==='light' ? 'dark' : state.theme==='dark' ? 'auto' : 'light'; localStorage.setItem('theme', state.theme); applyTheme(); alert('Theme: ' + state.theme); });
+$('#toggleTheme').addEventListener('click', ()=>{ state.theme = state.theme==='light' ? 'dark' : state.theme==='dark' ? 'light' : 'light'; localStorage.setItem('theme', state.theme); document.documentElement.classList.remove('light','dark'); if(state.theme==='dark') document.documentElement.classList.add('dark'); else if(state.theme==='light') document.documentElement.classList.add('light'); alert('Theme: ' + state.theme); });
 $('#exportJSON').addEventListener('click', ()=>{
   const cards = $$('.card');
   const data = cards.map(c=>{
