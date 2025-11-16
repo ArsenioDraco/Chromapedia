@@ -102,6 +102,23 @@ h1{ font-size: clamp(2rem, 4vw + 1rem, 3.4rem); margin:8px 0 4px; letter-spacing
     .panel{ 
         grid-column: 1 / -1 
     }
+   html.dark {
+  --bg: #0b0b10;
+  --panel:#11121a;
+  --muted:#a7aab3;
+  --text:#e8e9ee;
+  --accent:#7c5cff;
+  --shadow: 0 8px 30px rgba(0,0,0,.35);
+}
+
+html.light {
+  --bg:#f7f7fb;
+  --panel:#ffffff;
+  --muted:#6b7280;
+  --text:#0b0b10;
+  --accent:#5b6cff;
+  --shadow:0 6px 24px rgba(0,0,0,.08);
+}
   }
 
 
