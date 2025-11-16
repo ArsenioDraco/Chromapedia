@@ -85,6 +85,23 @@ h1{ font-size: clamp(2rem, 4vw + 1rem, 3.4rem); margin:8px 0 4px; letter-spacing
   .toast{ position:fixed; right:20px; bottom:24px; background:rgba(0,0,0,.8); color:#fff; padding:10px 14px; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,.4); z-index:9999 }
 
   footer{ color:var(--muted); text-align:center; padding:40px 20px }
+html.dark {
+  --bg: #0b0b10;
+  --panel:#11121a;
+  --muted:#a7aab3;
+  --text:#e8e9ee;
+  --accent:#7c5cff;
+  --shadow: 0 8px 30px rgba(0,0,0,.35);
+}
+
+html.light {
+  --bg:#f7f7fb;
+  --panel:#ffffff;
+  --muted:#6b7280;
+  --text:#0b0b10;
+  --accent:#5b6cff;
+  --shadow:0 6px 24px rgba(0,0,0,.08);
+}
 
   @media (max-width: 900px){
     .controls{ 
@@ -102,23 +119,6 @@ h1{ font-size: clamp(2rem, 4vw + 1rem, 3.4rem); margin:8px 0 4px; letter-spacing
     .panel{ 
         grid-column: 1 / -1 
     }
-   html.dark {
-  --bg: #0b0b10;
-  --panel:#11121a;
-  --muted:#a7aab3;
-  --text:#e8e9ee;
-  --accent:#7c5cff;
-  --shadow: 0 8px 30px rgba(0,0,0,.35);
-}
-
-html.light {
-  --bg:#f7f7fb;
-  --panel:#ffffff;
-  --muted:#6b7280;
-  --text:#0b0b10;
-  --accent:#5b6cff;
-  --shadow:0 6px 24px rgba(0,0,0,.08);
-}
   }
 
 
